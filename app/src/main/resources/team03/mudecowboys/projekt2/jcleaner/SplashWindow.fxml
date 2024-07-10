@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="team03.mudecowboys.projekt2.jcleaner.controller.SplashWindowController">
+   <children>
+      <VBox alignment="CENTER">
+         <children>
+            <Text fx:id="splashWelcome" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="Consolas" size="12.0" />
+               </font>
+            </Text>
+            <VBox alignment="CENTER_LEFT" maxWidth="350.0" prefWidth="350.0">
+               <children>
+                  <Text fx:id="splashAscii" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="Consolas" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
+</VBox>

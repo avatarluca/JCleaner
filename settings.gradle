@@ -1,0 +1,2 @@
+rootProject.name = 'team03-MudeCowboys-projekt2-JCleaner'
+include('app')

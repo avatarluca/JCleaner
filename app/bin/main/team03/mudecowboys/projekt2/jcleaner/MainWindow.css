@@ -1,0 +1,28 @@
+/* Settings style definitions */
+
+.settings_area {
+    -fx-padding: 20px;
+}
+.manifest_title {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
+.manifest_subtitle {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+.manifest_rule_title_area .manifest_example_title_area {
+    -fx-padding: 20 0 0 0;
+    -fx-font-weight: bold;
+}
+.manifest_rule_area {
+    -fx-padding: 10px;
+}
+.manifest_rule {
+    -fx-font-size: 12px;
+    -fx-text-fill: #ababab;
+}
+.manifest_rule_title {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}

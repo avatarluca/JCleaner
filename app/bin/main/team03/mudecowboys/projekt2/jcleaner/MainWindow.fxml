@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.collections.FXCollections?>
+<?import team03.mudecowboys.projekt2.jcleaner.model.util.ParameterCheckFeedbackTypes?>
+<?import team03.mudecowboys.projekt2.jcleaner.model.util.ExecutableLengthCheckTypes?>
+
+
+<VBox alignment="TOP_CENTER" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="team03.mudecowboys.projekt2.jcleaner.controller.MainWindowController">
+   <children>
+      <TabPane tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Scanner">
+            <content>
+                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@folder_icon.png" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Open Project">
+                           <font>
+                              <Font size="32.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a java file or a project folder for analysis.">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Button mnemonicParsing="false" onAction="#openFolder" prefHeight="40.0" prefWidth="200.0" text="Open Folder">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Label fx:id="errorMessage" textFill="#979797">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+            </content>
+          </Tab>
+          <Tab text="Settings">
+            <content>
+                  <VBox prefHeight="200.0" prefWidth="252.0">
+                     <children>
+                        <Accordion>
+                          <panes>
+                            <TitledPane animated="false" prefHeight="498.0" prefWidth="828.0" text="Coupling">
+                              <content>
+                                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                                       <content>
+                                          <VBox>
+                                             <children>
+                                                <TitledPane alignment="TOP_LEFT" animated="false" collapsible="false" contentDisplay="TOP" text="Instantiation Check">
+                                                  <content>
+                                                      <VBox>
+                                                         <children>
+                                                            <CheckBox fx:id="couplingInstantiationBiDirectional" mnemonicParsing="false" selected="true" text="Check if there is bidirectional dependency between classes" />
+                                                            <CheckBox fx:id="couplingInstantiationOnePlace" mnemonicParsing="false" selected="true" text="Check if each class is only instantiated in one field">
+                                                               <VBox.margin>
+                                                                  <Insets top="10.0" />
+                                                               </VBox.margin>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </VBox>
+                                                  </content>
+                                                </TitledPane>
+                                                <TitledPane animated="false" collapsible="false" contentDisplay="TOP" text="Access Check">
+                                                   <content>
+                                                      <VBox>
+                                                         <children>
+                                                            <CheckBox fx:id="couplingAccessMethod" mnemonicParsing="false" selected="true" text="Check public method" />
+                                                            <CheckBox fx:id="couplingAccessField" mnemonicParsing="false" selected="true" text="Check public fields">
+                                                               <VBox.margin>
+                                                                  <Insets top="10.0" />
+                                                               </VBox.margin>
+                                                            </CheckBox>
+                                                            <CheckBox fx:id="couplingAccessInnerClass" mnemonicParsing="false" selected="true" text="Check public inner classes">
+                                                               <VBox.margin>
+                                                                  <Insets top="10.0" />
+                                                               </VBox.margin>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                   <VBox.margin>
+                                                      <Insets top="30.0" />
+                                                   </VBox.margin>
+                                                </TitledPane>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                              </content>
+                            </TitledPane>
+                            <TitledPane animated="false" text="Cohesion">
+                              <content>
+                                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                                       <content>
+                                          <VBox>
+                                             <children>
+                                                <TitledPane animated="false" collapsible="false" contentDisplay="TOP" text="Parameter Check" VBox.vgrow="ALWAYS">
+                                                   <content>
+                                                      <VBox>
+                                                         <children>
+                                                            <CheckBox fx:id="enableParameterCheck" mnemonicParsing="false" selected="true" text="Enable parameter check" />
+                                                            <GridPane>
+                                                              <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Maximal amount of parameter: " />
+                                                                  <TextField fx:id="cohesionParameterMaxAmount" promptText="Maximal amount of parameter" text="5" GridPane.columnIndex="1">
+                                                                     <GridPane.margin>
+                                                                        <Insets />
+                                                                     </GridPane.margin>
+                                                                  </TextField>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Feedback type:" GridPane.rowIndex="1" />
+                                                                  <ChoiceBox fx:id="cohesionParameterFeedbackType" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                     <items>
+                                                                        <FXCollections fx:factory="observableArrayList">
+                                                                           <ParameterCheckFeedbackTypes fx:constant="BOTH" />
+                                                                           <ParameterCheckFeedbackTypes fx:constant="ARGUMENT_OBJECT"  />
+                                                                           <ParameterCheckFeedbackTypes fx:constant="BUILDER_OBJECT"  />
+                                                                           <ParameterCheckFeedbackTypes fx:constant="NONE"  />
+                                                                        </FXCollections>
+                                                                     </items>
+                                                                  </ChoiceBox>
+                                                               </children>
+                                                            </GridPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                </TitledPane>
+                                                <TitledPane animated="false" collapsible="false" contentDisplay="TOP" text="Fieldtypes Check">
+                                                   <content>
+                                                      <VBox>
+                                                         <children>
+                                                            <CheckBox fx:id="enableFieldTypeCheck" mnemonicParsing="false" selected="true" text="Enable fieldtypes check" />
+                                                            <GridPane>
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Maximal amount of different types:" />
+                                                                  <TextField fx:id="cohesionFieldMaxTypes" promptText="Maximal amount of different types" text="5" GridPane.columnIndex="1">
+                                                                     <GridPane.margin>
+                                                                        <Insets />
+                                                                     </GridPane.margin>
+                                                                  </TextField>
+                                                                  <CheckBox fx:id="cohesionFieldPrimitiveCheck" mnemonicParsing="false" text="Allow primitive / wrapper" GridPane.rowIndex="1" />
+                                                               </children>
+                                                            </GridPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                   <VBox.margin>
+                                                      <Insets top="30.0" />
+                                                   </VBox.margin>
+                                                </TitledPane>
+                                                <TitledPane animated="false" collapsible="false" contentDisplay="TOP" text="Codesegment Complexity Check">
+                                                   <content>
+                                                      <VBox>
+                                                         <children>
+                                                            <CheckBox fx:id="enableComplexityCheck" mnemonicParsing="false" selected="true" text="Enable sequence structure block check" />
+                                                            <GridPane>
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                                  <RowConstraints vgrow="SOMETIMES" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Maximal nested keywords:" />
+                                                                  <TextField fx:id="cohesionComplexityMaxAmount" promptText="Maximal amount of nested keywords " text="5" GridPane.columnIndex="1">
+                                                                     <GridPane.margin>
+                                                                        <Insets />
+                                                                     </GridPane.margin>
+                                                                  </TextField>
+                                                                  <TextArea fx:id="cohesionNestedKeywords" prefHeight="200.0" prefWidth="200.0" promptText="Nested words" text="'else if', 'if', 'else', 'switch', 'try', 'catch', 'finally', 'synchronized', 'for', 'do', 'while', 'class'" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Checked (key-)words:" GridPane.rowIndex="1" />
+                                                               </children>
+                                                            </GridPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                   <VBox.margin>
+                                                      <Insets top="30.0" />
+                                                   </VBox.margin>
+                                                </TitledPane>
+                                                <TitledPane animated="false" collapsible="false" contentDisplay="TOP" text="Method/Constructor Length Check">
+                                                   <content>
+                                                      <VBox>
+                                                         <children>
+                                                            <CheckBox fx:id="enableMethodLengthCheck" mnemonicParsing="false" selected="true" text="Enable method/constructor length check" />
+                                                            <GridPane>
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Check type: " />
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Maximal method length:" GridPane.rowIndex="1" />
+                                                                  <TextField fx:id="cohesionMethodLengthMethodMax" promptText="Maximal length" text="20" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                  </TextField>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Maximal constructor length:" GridPane.rowIndex="2" />
+                                                                  <TextField fx:id="cohesionMethodLengthConstructorMax" promptText="Maximal length" text="10" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <ChoiceBox fx:id="cohesionMethodLengthCheckType" prefWidth="150.0" GridPane.columnIndex="1">
+                                                                     <items>
+                                                                        <FXCollections fx:factory="observableArrayList">
+                                                                           <ExecutableLengthCheckTypes fx:constant="LINEBREAK_COUNTER" />
+                                                                           <ExecutableLengthCheckTypes fx:constant="SEMICOLON_COUNTER"  />
+                                                                        </FXCollections>
+                                                                     </items>
+                                                                  </ChoiceBox>
+                                                               </children>
+                                                            </GridPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                   <VBox.margin>
+                                                      <Insets top="30.0" />
+                                                   </VBox.margin>
+                                                </TitledPane>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                              </content>
+                            </TitledPane>
+                            <TitledPane animated="false" text="Clean Code">
+                              <content>
+                                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                                       <content>
+                                          <VBox>
+                                             <children>
+                                                <TitledPane animated="false" collapsible="false" contentDisplay="TOP" text="Naming Check">
+                                                   <content>
+                                                      <VBox>
+                                                         <children>
+                                                            <CheckBox fx:id="enableNamingCheck" mnemonicParsing="false" selected="true" text="Enable naming check" />
+                                                            <GridPane>
+                                                              <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <CheckBox fx:id="cleanCodeNamingEnableClass" mnemonicParsing="false" selected="true" text="Regex classname check"/>
+                                                                  <TextField fx:id="cleanCodeNamingClassRegex" promptText="Regular Expression" text="^[A-Z][A-Za-z0-9_]{0,20}$" GridPane.columnIndex="1" />
+                                                                  <CheckBox fx:id="cleanCodeNamingEnableMethod" mnemonicParsing="false" selected="true" GridPane.rowIndex="1" text="Regex methodname check"/>
+                                                                  <CheckBox fx:id="cleanCodeNamingEnableField" mnemonicParsing="false" selected="true" GridPane.rowIndex="2" text="Regex fieldname check" />
+                                                                  <TextField fx:id="cleanCodeNamingMethodRegex" promptText="Regular Expression" text="^[a-z][A-Za-z0-9_]{0,20}$" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <TextField fx:id="cleanCodeNamingFieldRegex" promptText="Regular Expression" text="^[a-z_][A-Za-z0-9_]{0,10}$" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                               </children>
+                                                            </GridPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </content>
+                                                </TitledPane>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                              </content>
+                            </TitledPane>
+                          </panes>
+                        </Accordion>
+                     </children>
+                     <padding>
+                        <Insets bottom="40.0" left="60.0" right="60.0" top="40.0" />
+                     </padding>
+                  </VBox>
+            </content>
+          </Tab>
+            <Tab text="Docs">
+               <content>
+                  <VBox alignment="CENTER" maxHeight="-Infinity">
+                     <children>
+                        <ScrollPane hbarPolicy="NEVER">
+                           <content>
+                              <VBox>
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_title" text="Coupling analysis documentation" />
+                                          <VBox styleClass="settings_area">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_subtitle" text="1.1 Instantiation Check" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_explanation" text="High dependency of individual classes can be measured, among other things, how often a respective class is used as a field in another class." wrappingWidth="500.0" />
+                                                <VBox styleClass="manifest_rule_title_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule_title" text="Manifest" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox styleClass="manifest_rule_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="§1.1.1  Each class has to be instantiated in only one other (relatedness by means of superclasses is disregarded)." wrappingWidth="500.0" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="§1.1.2  Additionally, there should be no bidirectional dependency between two classes (related to fields)." wrappingWidth="500.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox styleClass="settings_area">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_subtitle" text="1.2 Access Check" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_explanation" text="For reasons of encapsulation access modifiers should be as pessimistic as possible. This means that public elements should also be called somewhere outside the class (otherwise it would be unnecessary to declare them public)." wrappingWidth="500.0" />
+                                                <VBox styleClass="manifest_rule_title_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule_title" text="Manifest" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox styleClass="manifest_rule_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="§1.2.1  If a method is declared public, it should also be called outside the class. " wrappingWidth="500.0" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="§1.2.2  Fields should not be public (use getters and setters for this)." wrappingWidth="500.0" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="§1.2.3  Inner classes should not be public." wrappingWidth="500.0" />
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_title" text="Cohesion analysis documentation" />
+                                          <VBox styleClass="settings_area">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_subtitle" text="2.1 Parameter Check" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_explanation" text="If a method takes a lot of parameters, it means that this method also does a lot. This responsibility could be distributed to other methods.In addition, this is also regarding to clean code rules, confusing. Helper classes like argument objects or builder objects are preferred." wrappingWidth="500.0" />
+                                                <VBox styleClass="manifest_rule_title_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule_title" text="Manifest" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox styleClass="manifest_rule_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="§2.1.1  A method should only contain a certain number of parameters. Otherwise, an argument or builder object should be used." wrappingWidth="500.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox styleClass="settings_area">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_subtitle" text="2.2 Fieldtypes Check" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_explanation" text="If a class has many different instance variable types, this can be a code smell for low cohesion." wrappingWidth="500.0" />
+                                                <VBox styleClass="manifest_rule_title_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule_title" text="Manifest" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox styleClass="manifest_rule_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="\$2.2.1  A class should only contain a certain number of different field types." wrappingWidth="500.0" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="\$2.2.2  Primitive datatypes and wrapper classes should not be checked." wrappingWidth="500.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox styleClass="settings_area">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_subtitle" text="2.3 Codesegment Complexity Check" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_explanation" text="Sequence structure blocks, with alot of nested elements, can be an indication of low cohesion. One simplified possibility to measure complexity of a code scope is to count the nested/used keywords." wrappingWidth="500.0" />
+                                                <VBox styleClass="manifest_rule_title_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule_title" text="Manifest" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox styleClass="manifest_rule_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="§2.3.1  A code segment should use only a limited number of keywords to minimize complexity (and thus increase readability)." wrappingWidth="500.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox styleClass="settings_area">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_subtitle" text="2.4 Method/Constructor Length Check" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_explanation" text="Long methods or constructors can be a code smell for low cohesion.To messaure the length of a method we can use a counter of a specified symbol. Used symbols are a linebreak ('\n') or a semicolon (';')." wrappingWidth="500.0" />
+                                                <VBox styleClass="manifest_rule_title_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule_title" text="Manifest" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox styleClass="manifest_rule_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="§2.4.1  A method should only have a certain length. Otherwise you should outsource used code segments into further methods." wrappingWidth="500.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_title" text="Clean Code analysis documentation" />
+                                          <VBox styleClass="settings_area">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_subtitle" text="3.1 Naming Check" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_explanation" text="Elements can be easily determined by a respective regex whether the respective name matches the pattern or not." wrappingWidth="500.0" />
+                                                <VBox styleClass="manifest_rule_title_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule_title" text="Manifest" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox styleClass="manifest_rule_area">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="manifest_rule" text="§3.1.1  A method name should be simple and concise." wrappingWidth="500.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                           <VBox.margin>
+                              <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                           </VBox.margin>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>
