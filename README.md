@@ -50,6 +50,13 @@ The Resultwindow will tell you in which class and which position it found code n
 If further infos are needed (especially to decipher the result categories) there is a "docs" tab in the application.<br>
 There all the different test are documented.<br>
 
+
+## UI Screenshots
+![image](https://github.com/user-attachments/assets/ba12c92c-843f-4289-b4a8-cacc14440b8d)
+![image](https://github.com/user-attachments/assets/d2e90c2c-89c3-426e-b35c-600c6bd8d076)
+![image](https://github.com/user-attachments/assets/f9424944-b411-4dec-a8ec-d8b7781462e9)
+
+
 ## Ideas for future releases
 1️⃣ <b>"Checks for different packages at the same time."</b>
 - Description: Currently our testing tool can only test one package at a time.
