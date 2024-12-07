@@ -2,6 +2,7 @@
 A small Java Clean-Code analyse tool.<br>
 There are three categories which get tested: Coupling, Cohesion and Clean-Code.<br>
 In each category there are different settings to give you fine graind controll over the tests.
+
 > Last Update: 2023-07-01
 
 ### 1️⃣ Start the Application
