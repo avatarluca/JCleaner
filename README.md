@@ -3,16 +3,6 @@ A Java Clean-Code analyse tool.<br>
 There are three categories which get tested: Coupling, Cohesion and Clean-Code.<br>
 In each category there are different settings to give you fine graind controll over the tests.
 > Last Update: 2023-07-01
-## Team ("Die müden Cowboys")
-🧑‍💻 Alexander Kolenaty<br/>
-🧑‍💻 Gabriel Gillmann<br/>
-🧑‍💻 Luca Marceca<br/>
-🧑‍💻 Tobias Hefti
-
-## Getting Started
-> There is sample code for testing under "test project".
-> Since our main users are Java beginners according to the project outline, we have compiled 3 initial Java projects: Bank, Kaffee and Tic-Tac-Toe.
-> The folder user code contains further testable code, which intentionally has errors.
 
 ### 1️⃣ Start the Application
 Run the following command in the main project folder: 
@@ -49,9 +39,7 @@ All changes made to the settings get saved in a config file.
 ### 3️⃣ Open a Folder
 Go to Scanner and open a folder with files you would like to analyse.<br>
 In this version there are still different limitations to what project can be analysed. See the Limitations section for more info.<br>
-There is also "test-project" folder with different project to try out.<br>
-The project "user_code" is from us to try out all the different function and error catcher.<br>
-All other files are from a first semester coding examples from the programming lecture.<br>
+There is also "test-project" folder with different beginner projects to try out.<br>
 
 ### 4️⃣ Results
 After selecting a folder the program starts analysing.<br>
@@ -60,11 +48,6 @@ The Resultwindow will tell you in which class and which position it found code n
 ### 5️⃣ Further documentation
 If further infos are needed (especially to decipher the result categories) there is a "docs" tab in the application.<br>
 There all the different test are documented.<br>
-
-## Feature description
-## Implemented functional features
-Accessing .class files was implemented with java.util.reflect and with the extended Java Reflection standard library. 
-But since logical elements in method bodies etc. are not stored in a class file we created small parsers which can read and extract code bodies using adapted pushdown automatons. An alternative would have been parse trees (to define each code segment). But since we only need a small part of the parsing with our analysis tool, this was only partially implemented as described above.
 
 ## Ideas for future releases
 1️⃣ <b>"Checks for different packages at the same time."</b>
@@ -110,29 +93,3 @@ Limitations to what java projects can be analysed:
 - The java files have to be all in the same directory
 - The files need to be precompiled to class files with `javac` version 17
 - The class files must be in the same directory as the java files
-(In future realeases those limitations will be solved)
-
-
-# UML: Classdiagram
-![UML.svg](UML.svg)
-
-## Class Structure and reasoning behind it
-
-The class structure follows the Model-View-Controller (MVC) architectural pattern. This pattern is widely used in software development because it promotes a clear separation of concerns between the components of an application, making it easier to maintain and extend the codebase.
-
-In this specific case, the App.java class would be responsible for starting the application, and it would instantiate the MainWindow and the SplashWindowController. The MainWindow.java class is responsible for the user interface and would interact with the MainWindowController to update its state and respond to user events. Similarly, the SplashWindowController would control the behavior of the splash screen.
-
-The model package contains the core logic of the application. The analyzer subpackage contains classes responsible for analyzing the code. It has several subclasses such as CleanCodeDetector, CohesionDetector and CouplingDetector which all detect different code issues. The boot subpackage contains a Boot class responsible for the boot animation, and the db subpackage contains classes for handling the local database, including SettingsPropertiesHandler and SettingsDataSpecification. The exception subpackage defines custom exception classes, such as FalseCheckedKeywordFormat and TooManyPackagesException, which are used to handle specific error scenarios. The io subpackage contains classes responsible for loading projects. Finally, the util subpackage has various utility classes that support the other parts of the model.
-
-The LogConfiguration class is responsible for logging application events, providing better insight into the application's behavior during runtime.
-
-Where possible abstract classes where used. This makes additions in the future easier. An example for this would be the Detector. If needed new Detector classes can added for deeper analysis.
-
-# Testing
-
-We have tested the analysis models (detectors) using JUnit. For this purpose we have created the class DetectorTest.java. 
-
-Since our analysis program loads Java classes into the program only at runtime, it would be difficult to test using mock testing. 
-For future features, which interact with external APIs, Mockito would be ideal, but for the moment JUnit testing is sufficient.
-
-The test classes are predefined java classes, which were specially adapted to the individual tests. The test cases are therefore based on predefined results that the individual methods should return.
